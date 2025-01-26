@@ -1,10 +1,11 @@
 package com.curso.nelio.dslist.GameController;
 
+import com.curso.nelio.dslist.dto.GameDto;
 import com.curso.nelio.dslist.dto.GameMinDto;
-import com.curso.nelio.dslist.entities.Game;
 import com.curso.nelio.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,4 +24,11 @@ public class GameController {
         List<GameMinDto> result = gameService.findAll();
         return result;
     }
+
+    @GetMapping(value = "/{id}")
+    public GameDto findById(@PathVariable Long id) {
+        GameDto result = gameService.findById(id);
+        return result;
+    }
+
 }
