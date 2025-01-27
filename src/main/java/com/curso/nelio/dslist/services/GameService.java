@@ -3,6 +3,7 @@ package com.curso.nelio.dslist.services;
 import com.curso.nelio.dslist.dto.GameDto;
 import com.curso.nelio.dslist.dto.GameMinDto;
 import com.curso.nelio.dslist.entities.Game;
+import com.curso.nelio.dslist.projections.GameMinProjection;
 import com.curso.nelio.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,4 +33,10 @@ public class GameService {
         return new GameDto(result.get());
     }
 
+    @Transactional(readOnly = true)
+    public List<GameMinDto> findByList(Long listId) {
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        return result.stream().map(x -> new GameMinDto(x)).toList();
+
+    }
 }
